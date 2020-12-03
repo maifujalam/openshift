@@ -6,7 +6,7 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD [ "python", "./RestPlus.py" ]
+CMD [ "python", "./app.py" ]
 
 
 

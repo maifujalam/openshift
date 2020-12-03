@@ -30,7 +30,5 @@ spec:
         secret: 193bf94dd0b45e93
       type: GitHub
     - imageChange:
-        lastTriggeredImageID: >-
-          172.30.1.1:5000/openshift/python@sha256:ac50754646f0d37616515fb30467d8743fb12954260ec36c9ecb5a94499447e0
       type: ImageChange
     - type: ConfigChange

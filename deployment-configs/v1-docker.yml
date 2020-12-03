@@ -1,0 +1,37 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: v1-docker
+  name: v1-docker
+  namespace: app1
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: v1-docker
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: v1-docker
+        deploymentconfig: v1-docker
+    spec:
+      containers:
+        - image: v1-docker
+          imagePullPolicy: Always
+          name: v1-docker
+          ports:
+            - containerPort: 5555
+              protocol: TCP
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - v1-docker
+        from:
+          kind: ImageStreamTag
+          name: v1-docker:latest
+          namespace: app1
+      type: ImageChange
+    - type: ConfigChange
