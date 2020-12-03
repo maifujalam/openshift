@@ -5,6 +5,7 @@ import json,pymongo
 
 
 
+
 class CURD:
     def __init__(self):
         self.client = pymongo.MongoClient('localhost', 27017)
