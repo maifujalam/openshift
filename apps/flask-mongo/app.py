@@ -40,7 +40,7 @@ class CURD:
         return record.deleted_count
 
 app = Flask(__name__)
-api = Api(app, version='1.5', title="New Title 1 ", description="Its a Hello World App", contact_email='abc@gmail.com')
+api = Api(app, version='1.6', title="New Title 1 ", description="Its a Hello World App", contact_email='abc@gmail.com')
 # NS = Namespace(name="Sample ", description="Description 1")
 model1 = api.model("Users", {
     'id': flask_restplus.fields.Integer(required=True, description="Id of the user"),
