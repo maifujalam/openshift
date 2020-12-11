@@ -4,7 +4,8 @@ metadata:
   name: v1-docker
   namespace: app1
 spec:
-  host: v1-docker-app1.192.168.99.101.nip.io
+  port:
+    targetPort: 5555-tcp
   to:
     kind: Service
     name: v1-docker

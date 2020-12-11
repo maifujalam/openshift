@@ -7,8 +7,8 @@ spec:
   selector:
     app: v1
   ports:
-  - nodePort: 0
-    port: 80
+  - portName: 5555-tcp
+    port: 5555
     protocol: TCP
     targetPort: 5555
   type: ClusterIP

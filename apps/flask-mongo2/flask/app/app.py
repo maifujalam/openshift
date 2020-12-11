@@ -5,11 +5,11 @@ import json,pymongo
 
 class CURD:
     def __init__(self):
-        self.client = pymongo.MongoClient('mongo', 27017)
+        self.client = pymongo.MongoClient('mongodb', 27017)
 
     def connection(self):
         try:
-            self.client = pymongo.MongoClient('mongo', 27017)
+            self.client = pymongo.MongoClient('mongodb', 27017)
             print(self.client)
         except Exception:
             print("Connection Error")
