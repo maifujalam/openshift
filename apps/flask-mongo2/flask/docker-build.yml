@@ -1,0 +1,32 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: flask
+  name: flask
+  namespace: app1
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'v1-docker:latest'
+  runPolicy: Serial
+  source:
+    contextDir: apps/flask-mongo2/flask/app
+    git:
+      ref: master
+      uri: 'https://github.com/maifujalam/openshift.git'
+    type: Git
+  strategy:
+    dockerStrategy:
+    type: Docker
+  triggers:
+    - generic:
+        secret: dd9e80e30ea477ee
+      type: Generic
+    - github:
+        secret: 193bf94dd0b45e93
+      type: GitHub
+    - imageChange:
+      type: ImageChange
+    - type: ConfigChange

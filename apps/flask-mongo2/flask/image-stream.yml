@@ -2,6 +2,6 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   labels:
-    app: v1-docker
-  name: mongodb:4.2
-  namespace: app2
+    app: flask
+  name: v1-docker
+  namespace: app1

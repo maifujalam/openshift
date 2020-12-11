@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: v1-docker
+  namespace: app1
+spec:
+  host: v1-docker-app1.192.168.99.101.nip.io
+  to:
+    kind: Service
+    name: v1-docker
+    weight: 100

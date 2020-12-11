@@ -1,0 +1,27 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: mongodb2
+  name: mongodb2
+  namespace: app2
+spec:
+  replicas: 1
+  selector:
+    app: mongodb2
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: mongodb2
+    spec:
+      containers:
+        - image: mongo:4.2
+          imagePullPolicy: IfNotPresent
+          name: mongodb2
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+  triggers:
+    - type: ConfigChange

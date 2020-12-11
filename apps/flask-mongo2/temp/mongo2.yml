@@ -1,0 +1,73 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: '2020-12-05T10:50:39Z'
+  generation: 1
+  labels:
+    app: mongodb2
+  name: mongodb2
+  namespace: app2
+  resourceVersion: '1229260'
+  selfLink: /apis/apps.openshift.io/v1/namespaces/app2/deploymentconfigs/mongodb2
+  uid: b6af7ebd-36e7-11eb-9482-0800270d1d27
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: mongodb2
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mongodb2
+    spec:
+      containers:
+        - image: 'mongo:4.2'
+          imagePullPolicy: IfNotPresent
+          name: mongodb2
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - mongodb2
+        from:
+          kind: ImageStreamTag
+          name: 'mongodb:latest'
+          namespace: app2
+      type: ImageChange
+    - type: ConfigChange
+status:
+  availableReplicas: 0
+  conditions:
+    - lastTransitionTime: '2020-12-05T10:50:39Z'
+      lastUpdateTime: '2020-12-05T10:50:39Z'
+      message: Deployment config does not have minimum availability.
+      status: 'False'
+      type: Available
+  latestVersion: 0
+  observedGeneration: 1
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

@@ -1,0 +1,10 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mongo-route
+  namespace: app1
+spec:
+  to:
+    kind: Service
+    name: mongodb
+    weight: 100
