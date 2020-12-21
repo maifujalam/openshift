@@ -2,36 +2,27 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: v1-docker
-  name: v1-docker
-  namespace: app1
+    app: app3
+  name: app3
+  namespace: app3
 spec:
   replicas: 1
   selector:
-    deploymentconfig: v1-docker
+    deploymentconfig: app3
   strategy:
     type: Rolling
   template:
     metadata:
       labels:
-        app: v1-docker
-        deploymentconfig: v1-docker
+        app: app3
+        deploymentconfig: app3
     spec:
       containers:
-        - image: v1-docker
-          imagePullPolicy: Always
-          name: v1-docker
+        - image: docker.io/mongo:4.2-bionic
+          imagePullPolicy: IfNotPresent
+          name: app3
           ports:
-            - containerPort: 5555
+            - containerPort: 27017
               protocol: TCP
   triggers:
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - v1-docker
-        from:
-          kind: ImageStreamTag
-          name: v1-docker:latest
-          namespace: app1
-      type: ImageChange
     - type: ConfigChange

@@ -1,15 +1,21 @@
 from flask import Flask, request
 from flask_restplus import Api, swagger, Resource, Namespace
 import flask_restplus
-import json,pymongo
+import json, pymongo
+
+HOST = 'mongodb'
+PORT = 27017
+USERNAME = "admin"
+PASSWORD = "tHRGQg1hm8KmMQfb"
+
 
 class CURD:
     def __init__(self):
-        self.client = pymongo.MongoClient('mongodb', 27017)
+        self.client = pymongo.MongoClient(host=HOST, port=PORT, username=USERNAME, password=PASSWORD)
 
     def connection(self):
         try:
-            self.client = pymongo.MongoClient('mongodb', 27017)
+            self.client = pymongo.MongoClient(host=HOST, port=PORT, username=USERNAME, password=PASSWORD)
             print(self.client)
         except Exception:
             print("Connection Error")
@@ -38,6 +44,7 @@ class CURD:
         record = self.client['curd']['c1'].delete_many(myquery)  # Filtering
         print(record.deleted_count)
         return record.deleted_count
+
 
 app = Flask(__name__)
 api = Api(app, version='1.6', title="New Title 1 ", description="Its a Hello World App", contact_email='abc@gmail.com')
@@ -107,4 +114,4 @@ class S1(flask_restplus.Resource):
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0",port=5555)
+    app.run(debug=True, host="0.0.0.0", port=5555)
