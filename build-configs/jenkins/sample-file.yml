@@ -6,7 +6,7 @@ spec:
   source:
     git:
       uri: "https://github.com/maifujalam/openshift.git"
-    contextDir: apps/flask-mongo
+    contextDir: apps/flask-mongo2
   strategy:
     jenkinsPipelineStrategy:
 #      jenkinsfilePath:
