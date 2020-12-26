@@ -1,0 +1,20 @@
+- name: Configure RHEL
+  hosts: origin
+  become: yes
+  tasks:
+    - include_role:
+        name: 1.rhel_initial_config
+
+- name: Install k8s
+  hosts: origin
+  become: yes
+  tasks:
+    - include_role:
+        name: 2.k8sdeploy
+
+- name: Install prometheous
+  hosts: origin
+  become: yes
+  tasks:
+    - include_role:
+        name: origin

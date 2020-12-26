@@ -1,0 +1,39 @@
+IMAGE_NAME = "generic/rhel7"    # Base image of VM which is vagrant box of Ubuntu Bionic 18.04 TLS
+CPU = 2                  # Specify the CPU of master VM(Example :-1,2)                 # Specify CPU of each slave VMs(Example :-1,2)
+MEMORY = 4096            # Specify the RAM of master VMs in MB(Example :- 2048,4096)         # Specify the RAM of each slave VMs in MB(Example :- 2048,4096)
+HDD = '15GB'                    # HDD of Each VM (Examples :- "15GB","20GB","30GB")
+BOX_VERSION = "3.0.6"
+OC_PORT = 8001
+HOST_NAME = "origin1"
+HOST_IP = "192.100.100.200"
+
+Vagrant.configure("2") do |config|
+    config.vagrant.plugins = ['vagrant-disksize','vagrant-hostmanager']
+    config.ssh.insert_key = false
+    config.vm.box_check_update = false
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true  # false to disable update '/etc/hosts' of host with guest VMs dns.
+    config.hostmanager.manage_guest = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+    config.disksize.size = HDD
+    config.vm.synced_folder ".", "/vagrant", disabled: false
+    config.vm.network "forwarded_port", guest: 8443, host: OC_PORT, host_ip: "127.0.0.1"
+    config.vm.define "origin" do |origin|
+        origin.vm.provider "virtualbox" do |vmm|
+            vmm.memory = MEMORY
+            vmm.cpus = CPU
+            vmm.gui = false
+        end
+        origin.vm.box = IMAGE_NAME
+        origin.vm.box_version = BOX_VERSION
+        origin.vm.network "private_network", ip: HOST_IP
+        origin.vm.hostname = HOST_NAME
+        origin.vm.provision "shell", inline: <<-SHELL
+              sudo yum install python-pip yum-utils -y
+              cd /vagrant
+              ./ShellScript/update_ssh_config.sh
+        SHELL
+    end
+
+end

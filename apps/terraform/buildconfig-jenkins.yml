@@ -1,12 +1,12 @@
 kind: "BuildConfig"
 apiVersion: "v1"
 metadata:
-  name: "sample-pipeline"
+  name: "pipeline-terraform"
 spec:
   source:
     git:
       uri: "https://github.com/maifujalam/openshift.git"
-    contextDir: apps/flask-mongo2
+    contextDir: apps/terraform
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfilePath:
