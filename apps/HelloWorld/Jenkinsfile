@@ -3,12 +3,13 @@ pipeline {
     stages {
         stage('Pull source code') {
             steps {
-                git 'https://github.com/maifujalam/openshift.git'
+                sh "ls -al"
+//                 git 'https://github.com/maifujalam/openshift.git'
             }
         }
-
         stage('Build'){
             steps{
+
                 echo "building"
             }
         }
