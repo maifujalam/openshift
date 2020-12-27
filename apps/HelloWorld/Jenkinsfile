@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull source code') {
+            steps {
+                git 'https://github.com/maifujalam/openshift.git'
+            }
+        }
+        stage('Build'){
+            steps{
+                echo "building"
+            }
+        }
+    }
+}

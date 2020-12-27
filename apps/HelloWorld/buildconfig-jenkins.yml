@@ -1,0 +1,12 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "HelloWorld-pipeline"
+spec:
+  source:
+    git:
+      uri: "https://github.com/maifujalam/openshift.git"
+    contextDir: apps/HelloWorld
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath:
