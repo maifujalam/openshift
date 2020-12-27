@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Pull source code') {
             steps {
+                echo "1.0"
                 sh "ls -al"
 //                 git 'https://github.com/maifujalam/openshift.git'
             }
