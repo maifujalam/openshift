@@ -7,9 +7,10 @@ pipeline {
         stage('Pull source code') {
             steps {
                 echo "Pulling "
-                   git branch: 'master',url: 'https://github.com/maifujalam/openshift.git'
-                   echo "debug"
-                   sh "git branch"
+                git branch: 'master',url: 'https://github.com/maifujalam/openshift.git'
+                echo "debug"
+                sh "git branch"
+                sh "ls -al"
             }
         }
         stage('Build'){
