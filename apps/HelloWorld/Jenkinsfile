@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo "Pulling "
 //                 git 'https://github.com/maifujalam/openshift.git'
-                    git branch
+                   git branch: 'master',url: 'https://github.com/maifujalam/openshift.git'
             }
         }
         stage('Build'){
