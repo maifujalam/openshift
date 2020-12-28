@@ -18,6 +18,8 @@ pipeline {
                     openshift.withCluster(){
                         openshift.withProject(){
                             echo "Using project: ${openshift.project()}"
+                            openshift.newProject("temp1")
+                            echo "Using project: ${openshift.project()}"
                         }
                     }
                 }
