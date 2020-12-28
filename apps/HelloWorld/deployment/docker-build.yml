@@ -2,8 +2,8 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    app: flask
-  name: flask
+    app: helloworld
+  name: helloworld
   namespace: app1
 spec:
   output:
