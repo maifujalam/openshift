@@ -6,14 +6,15 @@ pipeline {
     stages {
         stage('Pull source code') {
             steps {
-                echo "1.5"
-                sh "ls -al"
+                echo "Pulling "
 //                 git 'https://github.com/maifujalam/openshift.git'
+                    git branch
             }
         }
         stage('Build'){
             steps{
                 echo "building"
+
             }
         }
     }
