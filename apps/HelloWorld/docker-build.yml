@@ -1,0 +1,26 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: flask
+  name: flask
+  namespace: app1
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'helloworld-docker:latest'
+  runPolicy: Serial
+  source:
+    contextDir: apps/HelloWorld/app
+    git:
+      ref: master
+      uri: 'https://github.com/maifujalam/openshift.git'
+    type: Git
+  strategy:
+    dockerStrategy:
+    type: Docker
+  triggers:
+    - imageChange:
+      type: ImageChange
+    - type: ConfigChange
