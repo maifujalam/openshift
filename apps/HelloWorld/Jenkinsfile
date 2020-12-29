@@ -7,7 +7,7 @@ pipeline {
         stage('Pull source code') {
             steps {
                 echo "Pulling "
-//                 git branch: 'master',url: 'https://github.com/maifujalam/openshift.git'
+                git branch: 'master',url: 'https://github.com/maifujalam/openshift.git'
                 echo "debug"
                 sh "git branch"
                 sh "ls -al"
@@ -18,7 +18,8 @@ pipeline {
                 script{
                     openshift.withCluster(){
                         openshift.withProject(){
-                            echo "Using project: ${openshift.project()}"
+                            echo "Using project: ${openshift.project()}
+                            "sh "ls -al"
                             openshiftBuild(buildConfig: 'docker-build',showBuildLogs: 'true')
                         }
                     }
