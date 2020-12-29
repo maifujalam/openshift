@@ -19,7 +19,7 @@ pipeline {
                     openshift.withCluster(){
                         openshift.withProject(){
                             echo "Using project: ${openshift.project()}"
-                            openshiftBuild(buildConfig: 'apps/HelloWorld/deployment/docker-build.yml',showBuildLogs: 'true')
+                            openshiftBuild(buildConfig: 'docker-build',showBuildLogs: 'true')
                         }
                     }
                 }
