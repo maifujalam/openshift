@@ -18,8 +18,8 @@ pipeline {
                 script{
                     openshift.withCluster(){
                         openshift.withProject(){
-                            echo "Using project: ${openshift.project()}
-                            "sh "ls -al"
+                            echo "Using project: ${openshift.project()}"
+                            sh "ls -al"
                             openshiftBuild(buildConfig: 'docker-build',showBuildLogs: 'true')
                         }
                     }
