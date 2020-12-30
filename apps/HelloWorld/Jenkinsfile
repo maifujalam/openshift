@@ -34,45 +34,45 @@ pipeline {
                 }
             }
         }
-        stage('Build'){
-            steps{
-                script{
-                    openshift.withCluster(){
-                        openshift.withProject(){
-                            echo "Using project: ${openshift.project()}"
-                            sh "oc version"
-                            sh "oc apply -f apps/HelloWorld/deployment/image-stream.yml"
-                            sh "oc apply -f apps/HelloWorld/deployment/docker-build.yml"
-                            openshiftBuild(buildConfig: 'helloworld',showBuildLogs: 'true')
-                        }
-                    }
-                }
-            }
-        }
-        stage("Deploy"){
-            steps{
-                script{
-                    openshift.withCluster(){
-                        openshift.withProject(){
-                            sh "oc apply -f apps/HelloWorld/deployment/deployment.yml"
-//                             openshiftDeploy(depCfg: 'helloworld')
-                        }
-                    }
-                }
-            }
-        }
-        stage("Exposing"){
-            steps{
-                script{
-                    openshift.withCluster(){
-                        openshift.withProject(){
-                            echo "Using project: ${openshift.project()}"
-                            sh "oc apply -f apps/HelloWorld/deployment/service.yml"
-                            sh "oc apply -f apps/HelloWorld/deployment/route.yml"
-                        }
-                    }
-                }
-            }
-        }
+//         stage('Build'){
+//             steps{
+//                 script{
+//                     openshift.withCluster(){
+//                         openshift.withProject(){
+//                             echo "Using project: ${openshift.project()}"
+//                             sh "oc version"
+//                             sh "oc apply -f apps/HelloWorld/deployment/image-stream.yml"
+//                             sh "oc apply -f apps/HelloWorld/deployment/docker-build.yml"
+//                             openshiftBuild(buildConfig: 'helloworld',showBuildLogs: 'true')
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//         stage("Deploy"){
+//             steps{
+//                 script{
+//                     openshift.withCluster(){
+//                         openshift.withProject(){
+//                             sh "oc apply -f apps/HelloWorld/deployment/deployment.yml"
+// //                             openshiftDeploy(depCfg: 'helloworld')
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//         stage("Exposing"){
+//             steps{
+//                 script{
+//                     openshift.withCluster(){
+//                         openshift.withProject(){
+//                             echo "Using project: ${openshift.project()}"
+//                             sh "oc apply -f apps/HelloWorld/deployment/service.yml"
+//                             sh "oc apply -f apps/HelloWorld/deployment/route.yml"
+//                         }
+//                     }
+//                 }
+//             }
+//         }
     }
 }
