@@ -22,6 +22,7 @@ pipeline {
 //                             sh "ls -al"
 //                             openshiftBuild(buildConfig: 'docker-build',showBuildLogs: 'true')
                             sh "oc version"
+                            sh "oc apply -f apps/HelloWorld/deployment/image-stream.yml"
                             sh "oc apply -f apps/HelloWorld/deployment/docker-build.yml"
                             openshiftBuild(buildConfig: 'helloworld',showBuildLogs: 'true')
                         }
