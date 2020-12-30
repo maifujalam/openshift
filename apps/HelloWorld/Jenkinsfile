@@ -21,7 +21,7 @@ pipeline {
                     openshift.withCluster(){
                         openshift.withProject(){
                         echo "Using project: ${openshift.project()} cluster: ${openshift.cluster()}"
-                            def allSelector = openshift.selector("all", [ template : templateName ]).delete()
+                            def allSelector = openshift.selector("all", templateName).delete()
                                 if (openshift.selector("secrets", templateName).exists()) {
                                  openshift.selector("secrets", templateName).delete()
                             }
