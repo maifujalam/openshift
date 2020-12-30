@@ -13,6 +13,7 @@ pipeline {
                 sh "git branch"
                 sh "pwd"
                 sh "ls -al"
+                sh "cat apps/HelloWorld/deployment/deployment.yml"
             }
         }
         stage("Cleanup"){
