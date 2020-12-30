@@ -1,4 +1,4 @@
-def templateName = 'helloworld'
+def templateName = "helloworld"
 pipeline {
     agent any
     triggers {
