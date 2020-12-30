@@ -4,4 +4,3 @@ metadata:
   labels:
     app: helloworld
   name: helloworld-docker
-  namespace: app1
