@@ -31,6 +31,5 @@ spec:
         from:
           kind: ImageStreamTag
           name: helloworld-docker:latest
-          namespace: app1
       type: ImageChange
     - type: ConfigChange
