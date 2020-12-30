@@ -11,6 +11,7 @@ pipeline {
 //                 git branch: 'master',url: 'https://github.com/maifujalam/openshift.git'
                 echo "debug"
                 sh "git branch"
+                sh "echo pwd"
                 sh "ls -al"
             }
         }
