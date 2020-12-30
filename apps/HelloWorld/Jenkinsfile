@@ -24,6 +24,7 @@ pipeline {
                             if (openshift.selector("deployment", templateName).exists()) {
                                  echo "Cleaning deployment"
                                  openshift.selector("deployment", templateName).delete()
+                            }
                             if (openshift.selector("secrets", templateName).exists()) {
                                 echo "Cleaning secret"
                                 openshift.selector("secrets", templateName).delete()
