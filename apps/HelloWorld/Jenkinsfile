@@ -19,17 +19,27 @@ pipeline {
                     openshift.withCluster(){
                         openshift.withProject(){
                             echo "Using project: ${openshift.project()}"
-//                             sh "ls -al"
-//                             openshiftBuild(buildConfig: 'docker-build',showBuildLogs: 'true')
                             sh "oc version"
                             sh "oc apply -f apps/HelloWorld/deployment/image-stream.yml"
                             sh "oc apply -f apps/HelloWorld/deployment/docker-build.yml"
                             openshiftBuild(buildConfig: 'helloworld',showBuildLogs: 'true')
                         }
                     }
-
                 }
             }
         }
+        stage("Deploy"){
+            steps{
+                    script{
+                        openshift.withCluster(){
+                            openshift.withProject(){
+                                echo "Using project: ${openshift.project()}"
+                                sh "oc apply -f apps/HelloWorld/deployment/deployment.yml"
+                                openshiftDeploy(depCfg: 'helloworld')
+                            }
+                        }
+                    }
+                }
+            }
     }
 }

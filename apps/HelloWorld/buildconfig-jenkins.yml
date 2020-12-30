@@ -6,7 +6,7 @@ spec:
   source:
     git:
       uri: "https://github.com/maifujalam/openshift.git"
-    contextDir: apps/HelloWorld/deployment
+    contextDir: apps/HelloWorld
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfilePath:
