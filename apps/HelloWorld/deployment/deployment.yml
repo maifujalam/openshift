@@ -3,6 +3,7 @@ kind: DeploymentConfig
 metadata:
   labels:
     app: helloworld
+    deploymentconfig: helloworld
   name: helloworld
 spec:
   replicas: 1
