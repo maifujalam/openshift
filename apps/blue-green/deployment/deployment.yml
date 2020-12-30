@@ -1,0 +1,36 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: helloworld
+    deploymentconfig: helloworld
+  name: helloworld
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: helloworld
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        deploymentconfig: helloworld
+    spec:
+      containers:
+        - image: helloworld-docker
+          imagePullPolicy: Always
+          name: helloworld-docker
+          ports:
+            - containerPort: 5656
+              protocol: TCP
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - helloworld-docker
+        from:
+          kind: ImageStreamTag
+          name: helloworld-docker:latest
+      type: ImageChange
+    - type: ConfigChange
