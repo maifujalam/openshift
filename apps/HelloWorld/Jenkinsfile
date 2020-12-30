@@ -1,3 +1,4 @@
+def templateName = 'helloworld'
 pipeline {
     agent any
     triggers {
@@ -11,6 +12,20 @@ pipeline {
                 echo "debug"
                 sh "git branch"
                 sh "ls -al"
+            }
+        }
+        stage("Cleanup"){
+            steps{
+                script{
+                    openshift.withCluster(){
+                        openshift.withProject(){
+                            openshift.selector("all", [ template : templateName ]).delete()
+                                if (openshift.selector("secrets", templateName).exists()) {
+                                 openshift.selector("secrets", templateName).delete()
+                            }
+                        }
+                    }
+                }
             }
         }
         stage('Build'){
@@ -30,16 +45,28 @@ pipeline {
         }
         stage("Deploy"){
             steps{
-                    script{
-                        openshift.withCluster(){
-                            openshift.withProject(){
-                                echo "Using project: ${openshift.project()}"
-                                sh "oc apply -f apps/HelloWorld/deployment/deployment.yml"
-                                openshiftDeploy(depCfg: 'helloworld')
-                            }
+                script{
+                    openshift.withCluster(){
+                        openshift.withProject(){
+                            sh "oc apply -f apps/HelloWorld/deployment/deployment.yml"
+//                             openshiftDeploy(depCfg: 'helloworld')
                         }
                     }
                 }
             }
+        }
+        stage("Exposing"){
+            steps{
+                script{
+                    openshift.withCluster(){
+                        openshift.withProject(){
+                            echo "Using project: ${openshift.project()}"
+                            sh "oc apply -f apps/HelloWorld/deployment/service.yml"
+                            sh "oc apply -f apps/HelloWorld/deployment/route.yml"
+                        }
+                    }
+                }
+            }
+        }
     }
 }
