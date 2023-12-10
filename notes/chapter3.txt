@@ -1,0 +1,25 @@
+1. Redhat Images registries:-
+    a. Auth not required: registry.access.redhat.com
+    b. Auth required: registry.redhat.io
+2. Add docker registry:-
+   a. sudo vi /etc/containers/registries.conf.dpkg-new
+   b. unqualified-search-registries = ["registry.redhat.io","docker.io"]
+3. As we write Dockerfile in podman its Containerfile
+4. Build containerfile: podman build . --tag myapp:1
+5. Search any container image:
+   a. podman search registry.redhat.io/etcd
+   b. podman search docker.io/etcd
+6. Open Container Initiative (OCI),Universal Base Image (UBI)
+7. Temporary auth path: cat ${XDG_RUNTIME_DIR}/containers/auth.json
+8. One way to version images related to their packaged software product is to use semantic
+    versioning. Semantic version numbers form a string with the format MAJOR.MINOR.PATCH meaning:
+    • MAJOR: backward incompatible changes
+    • MINOR: backward compatible changes
+    • PATCH: bug fixes
+9. podman build --file Containerfile --tag quay.io/YOUR_QUAY_USER/IMAGE_NAME:TAG [-t abc:1]
+10. podman image inspect registry.redhat.io/rhel8/mariadb-103:1
+11. podman image rm -f REGISTRY/NAMESPACE/IMAGE_NAME:TAG
+12. podman image prune -af
+13. Use go template to efind image data: podman image \
+inspect registry.redhat.io/rhel8/mariadb-103:1 --format="{{.Config.Cmd}}"
+14. 

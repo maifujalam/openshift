@@ -1,0 +1,22 @@
+1. # podman pull registry.redhat.io/rhel7/rhel:7.9
+   Error: open /etc/containers/policy.json: no such file or directory
+2. Unable to authenticate registry.redhat.io
+   podman login registry.redhat.io -u sk.maifujalam@gmail.com
+3. podman run -d -p 8080:8080 registry.ocp4.example.com:8443/ubi8/httpd-24
+4. podman search registry.redhat.io/http
+5. Provided all runing process output: podman top http
+6. check json pod status: podman inspect http --format "Status: {{.State.Status}}"
+7. Podman stop container:
+   a. --all: to stop all container
+   b. it sends SIGTERM signal to gracefully shutdown container.
+   c. After sometime if container is not shutdown gracefully.Then it sends SIGKILL signal to kill container.
+   d. After SIGTERM,it gives 10 sec times by default before SIGKILL.This can be time updated by setting --time paramter.
+   f. Example:  podman stop http --time 15
+   g. Directly sending SIGKILL: podman kill http
+8. podman pause/unpause container:
+   a. pause: it sends SIGSTOP to to all process inside containerto suspend all process.
+   b. unpause: it unsuspends all containers process.
+9. podman restart contianer
+10. podman rm container: it removes all container.Also --force removes all running container.
+11. podman run -d --name basics-podman-server --net lab-net -p 8080:8080 registry.ocp4.example.com:8443/ubi8/httpd-24
+12. podman exec basics-podman-client curl -s http://basics-podman-server:8080 && echo

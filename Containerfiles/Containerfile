@@ -1,0 +1,2 @@
+FROM registry.redhat.io/ubi9
+CMD echo "Hello world"
