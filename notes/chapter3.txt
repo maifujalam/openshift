@@ -9,8 +9,7 @@
 5. Search any container image:
    a. podman search registry.redhat.io/etcd
    b. podman search docker.io/etcd
-6. Open Container Initiative (OCI),Universal Base Image (UBI)
-7. Temporary auth path: cat ${XDG_RUNTIME_DIR}/containers/auth.json
+6. Open Container Initiative (OCI),Universal Base Image (auth path: cat ${XDG_RUNTIME_DIR}/containers/auth.json
 8. One way to version images related to their packaged software product is to use semantic
     versioning. Semantic version numbers form a string with the format MAJOR.MINOR.PATCH meaning:
     • MAJOR: backward incompatible changes
@@ -22,4 +21,10 @@
 12. podman image prune -af
 13. Use go template to efind image data: podman image \
 inspect registry.redhat.io/rhel8/mariadb-103:1 --format="{{.Config.Cmd}}"
-14. 
+14. echo $XDG_RUNTIME_DIR => /run/user/1000
+15. podman login -u sk.maifujalam@gmail.com
+16. cat $XDG_RUNTIME_DIR/containers/auth.json
+17. The above cred is base 64 decoded.Encode it with echo "code" | base64 -d
+    echo c2subWFpZnVqYWxhbUBnbWFpbC5jb206TmV3bWFuMTIzQA== | base64 -d
+    sk.maifujalam@gmail.com:MyCred
+18.

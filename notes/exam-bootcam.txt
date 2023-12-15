@@ -1,0 +1,12 @@
+1. yum install podman -y AND login as root user.
+2. podman login quay.io [or any other pvt registry lcal-repo:5000 ]
+3. Q1. Run podman container with:
+  # podman run --name acme-demo-html -p 8001:80 -d -it -v /home/ec2-user/workspace/acme-demo-html/:/usr/share/nginx/html docker.io/library/nginx
+  # podman run --name acme-demo-html -d -p 8001:80 -v /home/desktop/workspace/acme-demo-html/index.html:/usr/share/nginx/index.html  docker.io/library/nginx # Hare mount folder not file.
+  Note:- The default nginx config loads the index.html file from the /usr/share/nginx/html directory inside the docket container.
+4. Autostart application as service:
+   sudo systemctl enable podman
+   cd /etc/systemd/system
+   podman generate systemd acme-demo-html --name > acme-demo-html.service
+----------------------------------------------------------------------------
+5.

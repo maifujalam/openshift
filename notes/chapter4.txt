@@ -1,0 +1,19 @@
+1. podman image tree hello-server:bad
+2. podman run -d --rm --name hello-best -p 3000:3000 hello-server:best
+3. podman volume ls --format="{{.Name}}\t{{.Driver}}"
+4. podman volume create a1
+5. podman volume inspect a1
+6. Reduce image layer:-
+   a. Using multi stage biuild:-
+      FROM base-image-1 as bi
+      CMD apt install abc
+
+      FROM base-image-2
+      COPY --from b1 /base-image-1-fs/ /base-image-2-fs
+
+   b. By chaining multiple RUN commands with && \ as below:-
+      RUN mkdir /etc/gitea && \
+      chown root:gitea /etc/gitea && \
+      chmod 770 /etc/gitea
+   c. podman image build --
+7.
