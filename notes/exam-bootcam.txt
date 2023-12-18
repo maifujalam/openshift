@@ -9,4 +9,35 @@
    cd /etc/systemd/system
    podman generate systemd acme-demo-html --name > acme-demo-html.service
 ----------------------------------------------------------------------------
-5.
+5. Q2. podman cp conf/default.conf acme-demo-nginx:/etc/nginx/conf.d/default.conf
+6. podman generate systemd --name acme-demo-nginx  > acme-demo-nginx.service
+-----------------------------------------------------------------------------
+7. Q3. podman run -itd --name Acme-demo-runtime_1 --env WELCOME_MESSAGE=ACME_Container_1 -p 8080:80 localhost/nginx:acme
+8. podman exec Acme-demo-runtime_1 env
+9. Podman cannot run 2 containers running on same host port.So,we need to stop one container and start another contaner for same host port.
+    a. podman stop Acme-demo-runtime_1
+    b. podman run -itd --name Acme-demo-runtime_2 --env WELCOME_MESSAGE=ACME_Container_2 -p 8080:80 localhost/nginx:acme
+    c. podman exec -it Acme-demo-runtime_2 env
+10. Hare,DONT careate service files as they wont start at same port and will cause eror.
+-----------------------------------------------------------------------------
+11. Q4. How to define build args in Containerfile?Its a way to change container build variable without changing containerfile.
+    a. In containerfile: ARG a=A
+    b. In cli: --build-args a=B
+    c. Its mostly used to assign ENV variable like:- ENV VERSION=${VERSION}
+12. Always pulll and push to the private grgistry mentioned in exam env.
+13. podman build --build-arg DB_ROOT_PASSWORD=acme --build-arg DB_ROOT_DATABASE=acme --tag acme-db --file Containerfile.acme-db
+14. podman tag localhost/acme-db-exporter:latest acmeregistry:5000/acme-dbexporter
+15. In exam always use the user which is providedinstead of root user.
+16. Make service filae at path: ~/.config/systemd/user/
+17 reload daemon: systemctl --user deaon-reload,
+--------------------------------------------
+18. podman run -p 8080:8080 --volume http-data:/var/www/html registry.access.redhat.com/ubi8/httpd-24:latest
+19. podman volume export http_data --output web_data.tar.gz
+20. podman volume import http_data web_data.tar.gz
+21. podman volume create acme-wp-app
+22. Q5.
+-------
+23. Q6. Hare we have to fix the wrong env variable provided in container image.So to fix it pass the env variable during runtime cli (podn run -e fix_key=fix_vaue).
+        After that we have to create service file to make it permanent.
+        Hare the right value we need to find from backend/db container by execing into it forst and fetch right environment variable with env command.
+        And also may be we need to change 3 env variable like:- db name,password,another one.

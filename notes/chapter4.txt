@@ -16,4 +16,13 @@
       chown root:gitea /etc/gitea && \
       chmod 770 /etc/gitea
    c. podman image build --
-7.
+7. Build parameters:-
+   a. ENTRYPOINT ["executable","param1","param2",...]
+   b. CMD executable param1 param2 ... paramn.
+      specifying executable in this way wrapps it in a shell command as sh -c "executable param1 param2 .."
+      When you run a command by passing it to the shell, inside the container the sh process gets the process ID (PID) 1 .
+   c. This affects how podman stop behaves because it sends the SIGTERM signal to the process
+        with PID 1 in the container. If that process does not know how to handle the signal, then
+        podman stop terminates the container abruptly after some time.
+8.       
+
