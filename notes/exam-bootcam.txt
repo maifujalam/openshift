@@ -1,7 +1,6 @@
-1. yum install podman -y AND login as root user.
+1. yum install podman -y AND login as exam provided user.
 2. podman login quay.io [or any other pvt registry lcal-repo:5000 ]
 3. Q1. Run podman container with:
-  # podman run --name acme-demo-html -p 8001:80 -d -it -v /home/ec2-user/workspace/acme-demo-html/:/usr/share/nginx/html docker.io/library/nginx
   # podman run --name acme-demo-html -d -p 8001:80 -v /home/desktop/workspace/acme-demo-html/index.html:/usr/share/nginx/index.html  docker.io/library/nginx # Hare mount folder not file.
   Note:- The default nginx config loads the index.html file from the /usr/share/nginx/html directory inside the docket container.
 4. Autostart application as service:
@@ -41,3 +40,7 @@
         After that we have to create service file to make it permanent.
         Hare the right value we need to find from backend/db container by execing into it forst and fetch right environment variable with env command.
         And also may be we need to change 3 env variable like:- db name,password,another one.
+24. podman run -p 8080:8080 --volume /www:/var/www/html:Z \
+registry.access.redhat.com/ubi8/httpd-24:latest
+25. ls -Zd /var/www
+26.
